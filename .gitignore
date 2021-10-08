@@ -1,0 +1,26 @@
+# Dependency directories
+node_modules/
+
+# Build directories
+dist/
+
+# Logs
+.DS_*
+*.log
+logs
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Optional cache directory
+.npm
+.cache
+
+# Optional eslint cache
+.eslintcache
+
+# Optional editor config
+.vscode
