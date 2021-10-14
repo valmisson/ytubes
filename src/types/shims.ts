@@ -11,6 +11,11 @@ export interface SearchOptions {
   language?: string
 }
 
+export interface Options {
+  language?: string
+  max?: number
+}
+
 export type ObjectType = {
   [key: string]: any // eslint-disable-line
 }

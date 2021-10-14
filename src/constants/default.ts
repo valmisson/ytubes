@@ -19,4 +19,6 @@ export const defaultOptions: SearchOptions = {
   language: 'en'
 }
 
+export const defaultMaxResults = 30
+
 export const ytURL = new URL('https://www.youtube.com/results')
