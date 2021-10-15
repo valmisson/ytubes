@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc --build",
     "lint": "eslint src/**/*.{js,ts}",
-    "release": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1 && git add CHANGELOG.md",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1 && git add CHANGELOG.md",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
