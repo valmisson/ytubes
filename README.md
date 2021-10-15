@@ -207,8 +207,13 @@ const videos = await ytubes.search('beautiful', { type: 'video' })
 |----------|---------|-------------|
 | `max` | `30` | Set the maximum amount of results to return. |
 | `language` | `en` | Set the language that you would like for results to be returned in. |
-| | | &#11206; **Option available only in** `search`. |
+| | | &#11206; Option available only in `search`. |
 | `type` | `video` | Set the type of search on Youtube. The supported types are `video`, `playlist`, `channel`, `movie`, and `live`. |
+
+
+## Note
+
+You should keep in mind that this library does not use an official YouTube API and a change may cause an error in the search.
 
 ## License
 [MIT](LICENSE)
