@@ -1,7 +1,7 @@
 {
   "name": "ytubes",
   "version": "0.0.1",
-  "description": "Search for youtube videos",
+  "description": "Search for videos, playlist, channel, movie and live on youtube without api key.",
   "author": "Valmisson Grizorte",
   "license": "MIT",
   "main": "dist/index.js",
