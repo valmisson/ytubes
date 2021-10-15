@@ -1,5 +1,5 @@
 import { URL } from 'url'
-import { SearchOptions, SearchTypes } from '../types/shims'
+import { SearchTypes } from '../types/shims'
 
 export const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -14,11 +14,10 @@ export const searchTypes: SearchTypes = {
   live: 'EgJAAQ=='
 }
 
-export const defaultOptions: SearchOptions = {
+export const defaultOptions = {
   type: 'video',
-  language: 'en'
+  language: 'en',
+  max: 30
 }
-
-export const defaultMaxResults = 30
 
 export const ytURL = new URL('https://www.youtube.com/results')

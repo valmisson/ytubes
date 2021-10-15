@@ -1,6 +1,6 @@
 import { ObjectType } from '../types/shims'
 import { ExtractData } from '../types/data'
-import { defaultMaxResults } from '../constants/default'
+import { defaultOptions } from '../constants/default'
 
 export function getSearchData (webPage: string): ObjectType {
   try {
@@ -26,7 +26,7 @@ export function toNumber (text: string): number {
   return parseInt(onlyNumberText)
 }
 
-export function sliceResults (arr: Array<ExtractData>, max = defaultMaxResults): Array<ExtractData> {
+export function sliceResults (arr: Array<ExtractData>, max = defaultOptions.max): Array<ExtractData> {
   return arr.slice(0, max)
 }
 

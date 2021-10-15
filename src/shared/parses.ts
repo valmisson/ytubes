@@ -1,8 +1,8 @@
-import { ObjectType, SearchType } from '../types/shims'
 import { Channel, ExtractData, Live, Playlist, PlaylistVideo, Video } from '../types/data'
+import { ObjectType } from '../types/shims'
 import { findByKey, toNumber } from '.'
 
-export function extractData (type: SearchType, data: ObjectType): Array<ExtractData> {
+export function extractData (type: string, data: ObjectType): Array<ExtractData> {
   const contents = getContents(data)
 
   const results = contents?.map((renderer: ObjectType): ExtractData => {

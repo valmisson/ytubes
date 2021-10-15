@@ -6,16 +6,14 @@ export type SearchType = 'video'
 
 export type SearchTypes = Record<SearchType, string>
 
-export interface SearchOptions {
-  type: SearchType
-  language?: string
-}
-
-export interface Options {
+export interface DefaultOptions {
+  type?: SearchType
   language?: string
   max?: number
 }
 
+export type Options = Omit<DefaultOptions, 'type'>
+
 export type ObjectType = {
-  [key: string]: any // eslint-disable-line
+  [key: string]: any // eslint-disable-line @typescript-eslint/no-explicit-any
 }

@@ -1,16 +1,18 @@
-import { SearchOptions } from '../types/shims'
 import { ExtractData } from '../types/data'
-import { extractData, fetch, findByKey, getSearchData, isEmpty } from '../shared'
+import { DefaultOptions } from '../types/shims'
 import { defaultOptions, headers, searchTypes, ytURL } from '../constants/default'
+import { extractData, fetch, findByKey, getSearchData, isEmpty, sliceResults } from '../shared'
 
-async function search (query: string, options: SearchOptions): Promise<Array<ExtractData>> {
-  options = options ? Object.assign(defaultOptions, options) : defaultOptions
-
+async function search (query: string, options: DefaultOptions): Promise<Array<ExtractData>> {
   if (!query) {
     throw new Error('Search query has empty')
   }
 
-  const { language, type } = options
+  const {
+    type = defaultOptions.type,
+    max = defaultOptions.max,
+    language = defaultOptions.language
+  } = options
 
   const sp: string = findByKey(type, searchTypes)
 
@@ -27,7 +29,8 @@ async function search (query: string, options: SearchOptions): Promise<Array<Ext
 
   if (isEmpty(renderer)) return []
 
-  const results = extractData(type, renderer)
+  const resultsData = extractData(type, renderer)
+  const results = sliceResults(resultsData, max)
 
   return results
 }

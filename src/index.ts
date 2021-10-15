@@ -1,6 +1,5 @@
 import { ExtractData } from './types/data'
 import { Options } from './types/shims'
-import { sliceResults } from './shared'
 import search from './functions/search'
 
 async function getVideo (query: string, options: Options): Promise<Array<ExtractData>> {
@@ -9,7 +8,7 @@ async function getVideo (query: string, options: Options): Promise<Array<Extract
     ...options
   })
 
-  return sliceResults(videos, options?.max)
+  return videos
 }
 
 async function getPlaylist (query: string, options: Options): Promise<Array<ExtractData>> {
@@ -18,7 +17,7 @@ async function getPlaylist (query: string, options: Options): Promise<Array<Extr
     ...options
   })
 
-  return sliceResults(playlists, options?.max)
+  return playlists
 }
 
 async function getChannel (query: string, options: Options): Promise<Array<ExtractData>> {
@@ -27,7 +26,7 @@ async function getChannel (query: string, options: Options): Promise<Array<Extra
     ...options
   })
 
-  return sliceResults(channels, options?.max)
+  return channels
 }
 
 async function getMovie (query: string, options: Options): Promise<Array<ExtractData>> {
@@ -36,7 +35,7 @@ async function getMovie (query: string, options: Options): Promise<Array<Extract
     ...options
   })
 
-  return sliceResults(movies, options?.max)
+  return movies
 }
 
 async function getLive (query: string, options: Options): Promise<Array<ExtractData>> {
@@ -45,7 +44,7 @@ async function getLive (query: string, options: Options): Promise<Array<ExtractD
     ...options
   })
 
-  return sliceResults(lives, options?.max)
+  return lives
 }
 
 export {
