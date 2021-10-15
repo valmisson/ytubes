@@ -41,16 +41,15 @@ function getVideoData (vRender: ObjectType): Video {
     return {
       id,
       title: compress(vRender?.title),
-      channel: getChannelLink(vRender),
-      uploaded: vRender?.publishedTimeText?.simpleText || unknown('Date'),
       views: getVideoViews(vRender),
       duration: vRender?.lengthText?.simpleText || '00:00',
+      uploaded: vRender?.publishedTimeText?.simpleText || unknown('Date'),
       link: getVideoLink(id),
       shareLink: getVideoLink(id, true),
+      channel: getChannelLink(vRender),
       thumbnail: getThumbnail(id)
     }
   } catch (err) {
-    console.log(err)
     throw new Error('Error on get video data')
   }
 }
@@ -66,9 +65,9 @@ function getPlaylistData (pRender: ObjectType): Playlist {
     return {
       id,
       title: getTitle(pRender),
-      channel: getChannelLink(pRender),
       videoCount: getPlaylistCount(pRender),
       link: getPlaylistLink(id),
+      channel: getChannelLink(pRender),
       thumbnail: getThumbnail(preview[0].id),
       preview
     }
@@ -104,8 +103,8 @@ function getChannelData (cRender: ObjectType): Channel {
     return {
       id,
       name: getTitle(cRender, 'Name'),
-      link: channelLink || unknown('Link'),
-      verified: getChannelVerified(cRender)
+      verified: getChannelVerified(cRender),
+      link: channelLink || unknown('Link')
     }
   } catch (err) {
     throw new Error('Error on get channel data')
@@ -119,9 +118,9 @@ function getLiveData (vRender: ObjectType): Live {
     return {
       id,
       title,
-      channel,
       link,
       shareLink,
+      channel,
       thumbnail
     }
   } catch (err) {
