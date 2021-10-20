@@ -1,6 +1,6 @@
 import { ExtractData } from './types/data'
 import { Options } from './types/shims'
-import search from './functions/search'
+import search from './core/search'
 
 async function getVideo (query: string, options: Options): Promise<Array<ExtractData>> {
   const videos = await search(query, {
