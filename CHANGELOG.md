@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/valmisson/ytubes/compare/v1.0.0...v1.1.0) (2021-10-21)
+
+
+### Features
+
+* add function `getMusic` ([b4619fb](https://github.com/valmisson/ytubes/commit/b4619fb306581b2fccb39c31af8d71aaa99bb49d))
+
+
+
 # 1.0.0 (2021-10-15)
 
 
