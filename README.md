@@ -3,7 +3,7 @@
 [![npm][npm-shields]](https://www.npmjs.com/package/ytubes)
 [![license][license-shields]](https://github.com/valmisson/ytubes/blob/main/LICENSE)
 
-Search for videos, playlist, channel, movie and live on youtube without api key.
+Search for videos, playlists, channels, movies. live and musics on youtube without api key.
 
 ## Install
 
@@ -172,6 +172,36 @@ const live = await ytubes.getLive('Coding in Chicago')
   ```
 </details>
 
+### getMusic(query, options)
+
+Returns the details of all musics found
+
+```js
+const music = await ytubes.getMusic("2Pac - Pac's Life")
+```
+
+<details>
+  <summary>Output</summary>
+
+  ```js
+  [
+    {
+      id: 'A1HvFGTB7NE',
+      title: "Pac's Life (feat. T.I. & Ashanti)",
+      artist: '2Pac',
+      album: "Pac's Life",
+      duration: '3:37',
+      link: 'https://music.youtube.com/watch?v=A1HvFGTB7NE',
+      videoLink: 'https://www.youtube.com/watch?v=A1HvFGTB7NE',
+      channel: 'https://music.youtube.com/channel/UC5RrGzC-JXglhFW5NhT4r6w',
+      thumbnail: 'https://i.ytimg.com/vi/A1HvFGTB7NE/maxresdefault.jpg',
+      explicit: true
+    },
+    ...
+  ]
+  ```
+</details>
+
 ### search(query, options)
 
 Returns the details of seach
@@ -208,7 +238,7 @@ const videos = await ytubes.search('beautiful', { type: 'video' })
 | `max` | `30` | Set the maximum amount of results to return. |
 | `language` | `en` | Set the language that you would like for results to be returned in. |
 | | | &#11206; Option available only in `search`. |
-| `type` | `video` | Set the type of search on Youtube. The supported types are `video`, `playlist`, `channel`, `movie`, and `live`. |
+| `type` | `video` | Set the type of search on Youtube. The supported types are `video`, `playlist`, `channel`, `movie`, `live`, and `music`. |
 
 
 ## Note

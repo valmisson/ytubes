@@ -1,9 +1,16 @@
-import { ExtractData } from './types/data'
-import { Options } from './types/shims'
-import search from './core/search'
+import { Channel, ExtractData, Live, Music, Playlist, Video } from './types/data'
+import { Options, SearchOptions } from './types/shims'
+import { defaultOptions } from './constants/default'
+import searchVideo from './core/searchVideo'
+import searchMusic from './core/searchMusic'
 
-async function getVideo (query: string, options: Options): Promise<Array<ExtractData>> {
-  const videos = await search(query, {
+const Options: Options = {
+  max: defaultOptions.max,
+  language: defaultOptions.language
+} as const
+
+async function getVideo (query: string, options = Options): Promise<Array<Video>> {
+  const videos = await searchVideo<Video>(query, {
     type: 'video',
     ...options
   })
@@ -11,8 +18,8 @@ async function getVideo (query: string, options: Options): Promise<Array<Extract
   return videos
 }
 
-async function getPlaylist (query: string, options: Options): Promise<Array<ExtractData>> {
-  const playlists = await search(query, {
+async function getPlaylist (query: string, options = Options): Promise<Array<Playlist>> {
+  const playlists = await searchVideo<Playlist>(query, {
     type: 'playlist',
     ...options
   })
@@ -20,8 +27,8 @@ async function getPlaylist (query: string, options: Options): Promise<Array<Extr
   return playlists
 }
 
-async function getChannel (query: string, options: Options): Promise<Array<ExtractData>> {
-  const channels = await search(query, {
+async function getChannel (query: string, options = Options): Promise<Array<Channel>> {
+  const channels = await searchVideo<Channel>(query, {
     type: 'channel',
     ...options
   })
@@ -29,8 +36,8 @@ async function getChannel (query: string, options: Options): Promise<Array<Extra
   return channels
 }
 
-async function getMovie (query: string, options: Options): Promise<Array<ExtractData>> {
-  const movies = await search(query, {
+async function getMovie (query: string, options = Options): Promise<Array<Video>> {
+  const movies = await searchVideo<Video>(query, {
     type: 'movie',
     ...options
   })
@@ -38,13 +45,29 @@ async function getMovie (query: string, options: Options): Promise<Array<Extract
   return movies
 }
 
-async function getLive (query: string, options: Options): Promise<Array<ExtractData>> {
-  const lives = await search(query, {
+async function getLive (query: string, options = Options): Promise<Array<Live>> {
+  const lives = await searchVideo<Live>(query, {
     type: 'live',
     ...options
   })
 
   return lives
+}
+
+async function getMusic (query: string, options = Options): Promise<Array<Music>> {
+  const musics = await searchMusic(query, options)
+
+  return musics
+}
+
+async function search (query: string, options: SearchOptions): Promise<Array<ExtractData>> {
+  const { type } = options
+
+  if (type === 'music') {
+    return await searchMusic(query, options)
+  }
+
+  return await searchVideo<Video | Playlist | Channel | Live>(query, options)
 }
 
 export {
@@ -53,5 +76,6 @@ export {
   getChannel,
   getMovie,
   getLive,
+  getMusic,
   search
 }

@@ -2,7 +2,7 @@ export interface Video {
   id: string
   title: string
   channel: string
-  duration: number
+  duration: string
   views: number
   thumbnail: string
   uploaded: string
@@ -27,6 +27,19 @@ export interface Playlist {
   preview: Array<Video>
 }
 
+export interface Music {
+  id: string
+  title: string
+  artist: string
+  album: string
+  duration: string
+  link: string
+  videoLink: string
+  channel: string
+  thumbnail: string,
+  explicit: boolean
+}
+
 export type Live = Omit<Video, 'duration' | 'views' | 'uploaded'>
 export type PlaylistVideo = Omit<Video, 'channel' | 'views' | 'uploaded'>
-export type ExtractData = Video | Playlist | Channel | Live | null
+export type ExtractData = Video | Playlist | Channel | Live | Music | null

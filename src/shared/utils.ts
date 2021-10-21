@@ -1,20 +1,5 @@
 import { ObjectType } from '../types/shims'
-import { ExtractData } from '../types/data'
 import { defaultOptions } from '../constants/default'
-
-export function getSearchData (webPage: string): ObjectType {
-  try {
-    const regex = /var ytInitialData = (.*);<\/script>/
-
-    const data: string = regex.exec(webPage)?.[1] || '{}'
-
-    const result: ObjectType = JSON.parse(data)
-
-    return result
-  } catch (err) {
-    throw new Error('Failed to parse YouTube search data. YouTube might have updated their site or no results returned.')
-  }
-}
 
 export function isEmpty (object: ObjectType): boolean {
   return Object.keys(object).length === 0
@@ -26,13 +11,17 @@ export function toNumber (text: string): number {
   return parseInt(onlyNumberText)
 }
 
-export function sliceResults (arr: Array<ExtractData>, max = defaultOptions.max): Array<ExtractData> {
+export function sliceResults <T> (arr: Array<T>, max = defaultOptions.max): Array<T> {
+  if (!arr) return []
+
   return arr.slice(0, max)
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function findByKey (key: string, object: ObjectType): any {
   let value: any
+
+  if (!object) return undefined
 
   Object.keys(object).some((k: string) => {
     if (k === key) {
@@ -51,4 +40,27 @@ export function findByKey (key: string, object: ObjectType): any {
   })
 
   return value
+}
+
+export function isYtURL (url: string): boolean {
+  url = url.replace(/\s+/g, '') // remove spaces
+
+  const pattern = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^"&?/\s]{11})/gi
+
+  return !!pattern.test(url)
+}
+
+export function decodeHEX (hex: string): string {
+  return hex
+    .replace(/\\x22/g, '"')
+    .replace(/\\x7b/g, '{')
+    .replace(/\\x7d/g, '}')
+    .replace(/\\x5b/g, '[')
+    .replace(/\\x5d/g, ']')
+    .replace(/\\x3b/g, ';')
+    .replace(/\\x3d/g, '=')
+    .replace(/\\x27/g, '\'')
+    .replace(/\\\\/g, 'doubleAntiSlash')
+    .replace(/\\/g, '')
+    .replace(/doubleAntiSlash/g, '\\')
 }

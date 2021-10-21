@@ -1,8 +1,9 @@
 import { Channel, ExtractData, Live, Playlist, PlaylistVideo, Video } from '../types/data'
 import { ObjectType } from '../types/shims'
-import { findByKey, toNumber } from '.'
+import { findByKey, toNumber } from '../shared'
+import { compress, getThumbnail, getVideoLink, unknown } from './utils'
 
-export function extractData (type: string, data: ObjectType): Array<ExtractData> {
+export function extractVideoData <T> (type: string, data: ObjectType): Array<T> {
   const contents = getContents(data)
 
   const results = contents?.map((renderer: ObjectType): ExtractData => {
@@ -128,26 +129,12 @@ function getLiveData (vRender: ObjectType): Live {
   }
 }
 
-function compress (key: ObjectType): string {
-  return key?.runs?.map((v: ObjectType) => v.text).join('')
-}
-
-function unknown (keyName: string): string {
-  return `Unknown ${keyName}`
-}
-
 function getTitle (dRender: ObjectType, keyName = 'Title'): string {
   const title = dRender?.title?.simpleText
 
   if (!title) return unknown(keyName)
 
   return title
-}
-
-function getThumbnail (id: string): string {
-  if (!id) return unknown('Thumbnail')
-
-  return `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
 }
 
 function getChannelLink (cRender: ObjectType): string {
@@ -169,12 +156,6 @@ function getVideoViews (vRender: ObjectType): number {
   const viewsText = vRender?.viewCountText?.simpleText || '0'
 
   return toNumber(viewsText)
-}
-
-function getVideoLink (videoId: string, short = false): string {
-  if (!videoId) return unknown('Link')
-
-  return short ? `https://youtu.be/${videoId}` : `https://www.youtube.com/watch?v=${videoId}`
 }
 
 function getPlaylistLink (playlistId: string): string {
