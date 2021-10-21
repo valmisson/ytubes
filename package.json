@@ -1,7 +1,7 @@
 {
   "name": "ytubes",
   "version": "1.0.0",
-  "description": "Search for videos, playlist, channel, movie and live on youtube without api key.",
+  "description": "Search for videos, playlists, channels, movies. live and musics on youtube without api key.",
   "author": "Valmisson Grizorte",
   "license": "MIT",
   "main": "dist/index.js",
@@ -43,7 +43,6 @@
   "keywords": [
     "youtube",
     "search",
-    "youtube search",
     "yt",
     "ytube",
     "video",
@@ -52,9 +51,15 @@
     "playlist",
     "scraper",
     "crawler",
+    "youtube search",
+    "youtube video",
+    "youtube music",
+    "youtube api",
+    "youtube download",
+    "youtube without api",
+    "youtube scraper",
     "typescript",
     "javascript",
-    "node",
-    "api"
+    "node"
   ]
 }
