@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/valmisson/ytubes/compare/v1.1.1...v1.2.0) (2021-10-22)
+
+
+### Features
+
+* add search type on result ([e26320b](https://github.com/valmisson/ytubes/commit/e26320b3bd1035ac77f2d0543a2ba972c718bccb))
+
+
+
 ## [1.1.1](https://github.com/valmisson/ytubes/compare/v1.1.0...v1.1.1) (2021-10-22)
 
 
