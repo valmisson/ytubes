@@ -32,7 +32,7 @@ import * as ytubes from 'ytubes'
 Returns the details of all videos found
 
 ```js
-const videos = await ytubes.getVideo('Amor e fé')
+const video = await ytubes.getVideo('Amor e fé')
 ```
 
 <details>
@@ -42,6 +42,7 @@ const videos = await ytubes.getVideo('Amor e fé')
   [
     {
       id: 'iZq0u3quAqo',
+      type: 'video',
       title: 'Hungria Hip Hop - Amor e Fé (Official Music Video) #CheiroDoMato',
       views: 291003057,
       duration: '5:24',
@@ -71,6 +72,7 @@ const playlist = await ytubes.getPlaylist('Tribo da Periferia - As Melhores')
   [
     {
       id: 'PL7V1hXWh2rMr4pz6lCkzHMHMLU3-BfQ2S',
+      type: 'playlist',
       title: 'AS MELHORES - TRIBO DA PERIFERIA',
       videoCount: 49,
       link: 'https://www.youtube.com/playlist?list=PL7V1hXWh2rMr4pz6lCkzHMHMLU3-BfQ2S',
@@ -108,6 +110,7 @@ const channel = await ytubes.getChannel('Hungria Hip Hop')
   [
     {
       id: 'UCAI8SmRbXgSpP8Zo3xZbxzQ',
+      type: 'channel',
       name: 'OficialHungria',
       verified: true
       link: 'https://www.youtube.com/c/OficialHungria',
@@ -132,6 +135,7 @@ const movie = await ytubes.getMovie('filmes de ação')
   [
     {
       id: 'MuTYo9tofSY',
+      type: 'video',
       title: 'Thor Ragnarok Full Video - Voiced Motion Comic (Marvel Comics)',
       views: 7119537,
       duration: '1:33:17',
@@ -161,6 +165,7 @@ const live = await ytubes.getLive('Coding in Chicago')
   [
     {
       id: 'esX7SFtEjHg',
+      type: 'live',
       title: 'Coding in Chicago | 🎧  LoFi Jazz Hip-Hop [Code - Relax - Study]',
       link: 'https://www.youtube.com/watch?v=esX7SFtEjHg',
       shareLink: 'https://youtu.be/esX7SFtEjHg',
@@ -187,6 +192,7 @@ const music = await ytubes.getMusic("2Pac - Pac's Life")
   [
     {
       id: 'A1HvFGTB7NE',
+      type: 'music',
       title: "Pac's Life (feat. T.I. & Ashanti)",
       artist: '2Pac',
       album: "Pac's Life",
@@ -217,6 +223,7 @@ const videos = await ytubes.search('beautiful', { type: 'video' })
   [
     {
       id: '_FE194VN6c4',
+      type: 'video',
       title: 'Snoop Dogg - Beautiful (Official Music Video) ft. Pharrell Williams',
       views: 160183177,
       duration: '5:29',

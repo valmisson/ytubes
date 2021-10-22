@@ -41,6 +41,7 @@ function getVideoData (vRender: ObjectType): Video {
 
     return {
       id,
+      type: 'video',
       title: compress(vRender?.title),
       views: getVideoViews(vRender),
       duration: vRender?.lengthText?.simpleText || '00:00',
@@ -65,6 +66,7 @@ function getPlaylistData (pRender: ObjectType): Playlist {
 
     return {
       id,
+      type: 'playlist',
       title: getTitle(pRender),
       videoCount: getPlaylistCount(pRender),
       link: getPlaylistLink(id),
@@ -103,6 +105,7 @@ function getChannelData (cRender: ObjectType): Channel {
 
     return {
       id,
+      type: 'channel',
       name: getTitle(cRender, 'Name'),
       verified: getChannelVerified(cRender),
       link: channelLink || unknown('Link')
@@ -118,6 +121,7 @@ function getLiveData (vRender: ObjectType): Live {
 
     return {
       id,
+      type: 'live',
       title,
       link,
       shareLink,

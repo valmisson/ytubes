@@ -56,6 +56,7 @@ function getMusicData (dRender: ObjectType): Music {
 
     return {
       id,
+      type: 'music',
       title: mRenderLeft?.text || unknown('Title'),
       artist: mRenderRightData[0]?.text || unknown('Artist'),
       album: mRenderRightData[1]?.text || unknown('Album'),

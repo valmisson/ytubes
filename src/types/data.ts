@@ -1,3 +1,5 @@
+import { SearchTypes } from './shims'
+
 export interface Video {
   id: string
   title: string
@@ -8,6 +10,7 @@ export interface Video {
   uploaded: string
   link: string
   shareLink: string
+  type: SearchTypes
 }
 
 export interface Channel {
@@ -15,6 +18,7 @@ export interface Channel {
   name: string
   link: string
   verified: boolean
+  type: SearchTypes
 }
 
 export interface Playlist {
@@ -25,6 +29,7 @@ export interface Playlist {
   thumbnail: string
   link: string
   preview: Array<Video>
+  type: SearchTypes
 }
 
 export interface Music {
@@ -38,8 +43,9 @@ export interface Music {
   channel: string
   thumbnail: string,
   explicit: boolean
+  type: SearchTypes
 }
 
 export type Live = Omit<Video, 'duration' | 'views' | 'uploaded'>
-export type PlaylistVideo = Omit<Video, 'channel' | 'views' | 'uploaded'>
+export type PlaylistVideo = Omit<Video, 'channel' | 'views' | 'uploaded' | 'type'>
 export type ExtractData = Video | Playlist | Channel | Live | Music | null
