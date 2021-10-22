@@ -1,3 +1,7 @@
+## [1.1.1](https://github.com/valmisson/ytubes/compare/v1.1.0...v1.1.1) (2021-10-22)
+
+
+
 # [1.1.0](https://github.com/valmisson/ytubes/compare/v1.0.0...v1.1.0) (2021-10-21)
 
 
