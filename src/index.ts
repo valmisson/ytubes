@@ -2,6 +2,7 @@ import { Channel, ExtractData, Live, Music, Playlist, Video } from './types/data
 import { Options, SearchOptions } from './types/shims'
 import { defaultOptions } from './constants/default'
 import searchVideo from './core/searchVideo'
+import channelLive from './core/channelLive'
 import searchMusic from './core/searchMusic'
 
 const Options: Options = {
@@ -34,6 +35,15 @@ async function getChannel (query: string, options = Options): Promise<Array<Chan
   })
 
   return channels
+}
+
+async function getChannelLive (channelId: string, options = Options): Promise<Array<Live>> {
+  const lives = await channelLive<Live>(channelId, {
+    type: 'channel-live',
+    ...options
+  })
+
+  return lives
 }
 
 async function getMovie (query: string, options = Options): Promise<Array<Video>> {

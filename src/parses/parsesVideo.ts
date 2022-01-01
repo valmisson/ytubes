@@ -10,6 +10,7 @@ export function extractVideoData <T> (type: string, data: ObjectType): Array<T> 
     if (type === 'video') return getVideoData(renderer?.videoRenderer)
     if (type === 'playlist') return getPlaylistData(renderer?.playlistRenderer)
     if (type === 'channel') return getChannelData(renderer?.channelRenderer)
+    if (type === 'channel-live') return getChannelLiveData(renderer?.channelRenderer)
     if (type === 'movie') return getVideoData(renderer?.videoRenderer)
     if (type === 'live') return getLiveData(renderer?.videoRenderer)
 
@@ -97,6 +98,25 @@ function getPlaylistVideoData (pRender: ObjectType): PlaylistVideo {
 }
 
 function getChannelData (cRender: ObjectType): Channel {
+  try {
+    const id = cRender?.channelId
+
+    const channelEndLink = findByKey('url', cRender.navigationEndpoint)
+    const channelLink = channelEndLink && `https://www.youtube.com${channelEndLink}`
+
+    return {
+      id,
+      type: 'channel',
+      name: getTitle(cRender, 'Name'),
+      verified: getChannelVerified(cRender),
+      link: channelLink || unknown('Link')
+    }
+  } catch (err) {
+    throw new Error('Error on get channel data')
+  }
+}
+
+function getChannelLiveData (cRender: ObjectType): Channel {
   try {
     const id = cRender?.channelId
 
