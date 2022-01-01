@@ -1,7 +1,7 @@
-import { URL } from 'url';
+import { URL } from 'url'
 import { SearchOptions } from '../types/shims'
 import { defaultOptions, headers } from '../constants/default'
-import { fetch, findByKey, isEmpty, sliceResults } from '../shared'
+import { fetch, isEmpty, sliceResults } from '../shared'
 import { extractVideoData, getSearchData } from '../parses'
 
 async function channelLive <T> (channelId: string, options: SearchOptions): Promise<Array<T>> {
@@ -15,8 +15,8 @@ async function channelLive <T> (channelId: string, options: SearchOptions): Prom
     language = defaultOptions.language
   } = options
 
-  let url = new URL(`https://m.youtube.com/channel/${channelId}/videos?view=2&live_view=501`);
-  const webPage = await fetch(url, {
+  const channelUrl = new URL(`https://www.youtube.com/channel/${channelId}/videos?view=2&live_view=501&ucbcb=1`)
+  const webPage = await fetch(channelUrl, {
     headers: {
       ...headers,
       'Accept-Language': language
@@ -33,4 +33,4 @@ async function channelLive <T> (channelId: string, options: SearchOptions): Prom
   return results
 }
 
-export default searchVideo
+export default channelLive

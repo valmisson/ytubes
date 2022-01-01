@@ -1,5 +1,6 @@
 export type SearchVideoType = 'video'
   | 'channel'
+  | 'channel-live'
   | 'playlist'
   | 'movie'
   | 'live'

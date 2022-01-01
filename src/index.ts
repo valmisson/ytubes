@@ -84,6 +84,7 @@ export {
   getVideo,
   getPlaylist,
   getChannel,
+  getChannelLive,
   getMovie,
   getLive,
   getMusic,

@@ -46,6 +46,6 @@ export interface Music {
   type: SearchTypes
 }
 
-export type Live = Omit<Video, 'duration' | 'views' | 'uploaded'>
+export type Live = Omit<Video, 'duration' | 'uploaded'>
 export type PlaylistVideo = Omit<Video, 'channel' | 'views' | 'uploaded' | 'type'>
 export type ExtractData = Video | Playlist | Channel | Live | Music | null
