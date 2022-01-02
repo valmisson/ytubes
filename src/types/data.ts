@@ -41,11 +41,14 @@ export interface Music {
   link: string
   videoLink: string
   channel: string
-  thumbnail: string,
+  thumbnail: string
   explicit: boolean
   type: SearchTypes
 }
 
-export type Live = Omit<Video, 'duration' | 'uploaded'>
+export type Live = Omit<Video, 'duration' | 'uploaded'> & {
+  live: boolean;
+}
+
 export type PlaylistVideo = Omit<Video, 'channel' | 'views' | 'uploaded' | 'type'>
 export type ExtractData = Video | Playlist | Channel | Live | Music | null

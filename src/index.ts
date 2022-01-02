@@ -38,7 +38,16 @@ async function getChannel (query: string, options = Options): Promise<Array<Chan
 }
 
 async function getChannelLive (channelId: string, options = Options): Promise<Array<Live>> {
-  const lives = await channelLive<Live>(channelId, {
+  const lives = await channelLive<Live>(channelId, true, {
+    type: 'channel-live',
+    ...options
+  })
+
+  return lives
+}
+
+async function getChannelPastLive (channelId: string, options = Options): Promise<Array<Live>> {
+  const lives = await channelLive<Live>(channelId, false, {
     type: 'channel-live',
     ...options
   })
@@ -85,6 +94,7 @@ export {
   getPlaylist,
   getChannel,
   getChannelLive,
+  getChannelPastLive,
   getMovie,
   getLive,
   getMusic,

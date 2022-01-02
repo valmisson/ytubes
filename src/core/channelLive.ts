@@ -4,7 +4,7 @@ import { defaultOptions, headers } from '../constants/default'
 import { fetch, isEmpty, sliceResults } from '../shared'
 import { extractVideoData, getSearchData } from '../parses'
 
-async function channelLive <T> (channelId: string, options: SearchOptions): Promise<Array<T>> {
+async function channelLive <T> (channelId: string, isLive: boolean, options: SearchOptions): Promise<Array<T>> {
   if (!channelId) {
     throw new Error('Channel id is empty')
   }
@@ -15,7 +15,8 @@ async function channelLive <T> (channelId: string, options: SearchOptions): Prom
     language = defaultOptions.language
   } = options
 
-  const channelUrl = new URL(`https://www.youtube.com/channel/${channelId}/videos?view=2&live_view=501&ucbcb=1`)
+  const liveCode = isLive ? '501' : '503'
+  const channelUrl = new URL(`https://www.youtube.com/channel/${channelId}/videos?view=2&live_view=${liveCode}&ucbcb=1`)
   const webPage = await fetch(channelUrl, {
     headers: {
       ...headers,
@@ -27,7 +28,10 @@ async function channelLive <T> (channelId: string, options: SearchOptions): Prom
 
   if (isEmpty(renderer)) return []
 
-  const resultsData = extractVideoData<T>(type, renderer)
+  const resultsData = extractVideoData<T>(type, renderer, {
+    channelId,
+    isLive
+  })
   const results = sliceResults<T>(resultsData, max)
 
   return results
