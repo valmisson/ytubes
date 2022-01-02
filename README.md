@@ -120,6 +120,64 @@ const channel = await ytubes.getChannel('Hungria Hip Hop')
   ```
 </details>
 
+### getChannelLive(channelId, options)
+
+Returns all the live streams of a specific channel
+
+```js
+const lives = await ytubes.getChannelLive('UCSJ4gkVC6NrvII8umztf0Ow')
+```
+
+<details>
+  <summary>Output</summary>
+
+  ```js
+  [
+    {
+      id: '5qap5aO4i9A',
+      type: 'live',
+      live: true,
+      title: 'lofi hip hop radio - beats to relax/study to',
+      link: 'https://www.youtube.com/watch?v=5qap5aO4i9A',
+      views: 25488,
+      shareLink: 'https://youtu.be/5qap5aO4i9A',
+      channel: 'https://www.youtube.com/channel/UCSJ4gkVC6NrvII8umztf0Ow',
+      thumbnail: 'https://i.ytimg.com/vi/5qap5aO4i9A/maxresdefault.jpg'
+    },
+    ...
+  ]
+  ```
+</details>
+
+### getChannelPastLive(channelId, options)
+
+Returns all the past live streams of a specific channel
+
+```js
+const lives = await ytubes.getChannelPastLive('UCXBE_QQSZueB8082ml5fslg')
+```
+
+<details>
+  <summary>Output</summary>
+
+  ```js
+  [
+    {
+      id: 'cilUevUhZfw',
+      type: 'live',
+      live: false,
+      title: 'TIMTHETATMAN RETURNS TO FORTNITE FT NINJA, MARSHMELLO & SYPHERPK',
+      link: 'https://www.youtube.com/watch?v=cilUevUhZfw',
+      views: 711695,
+      shareLink: 'https://youtu.be/cilUevUhZfw',
+      channel: 'https://www.youtube.com/channel/UCXBE_QQSZueB8082ml5fslg',
+      thumbnail: 'https://i.ytimg.com/vi/cilUevUhZfw/maxresdefault.jpg'
+    },
+    ...
+  ]
+  ```
+</details>
+
 ### getMovie(query, options)
 
 Returns the details of all movies found
@@ -166,8 +224,10 @@ const live = await ytubes.getLive('Coding in Chicago')
     {
       id: 'esX7SFtEjHg',
       type: 'live',
+      live: true,
       title: 'Coding in Chicago | 🎧  LoFi Jazz Hip-Hop [Code - Relax - Study]',
       link: 'https://www.youtube.com/watch?v=esX7SFtEjHg',
+      views: 142,
       shareLink: 'https://youtu.be/esX7SFtEjHg',
       channel: 'https://www.youtube.com/channel/UC9rvsIHgzuiwTQ-yi0Qj2Mw',
       thumbnail: 'https://i.ytimg.com/vi/esX7SFtEjHg/maxresdefault.jpg'
