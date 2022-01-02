@@ -9,6 +9,7 @@ export const headers = {
 export const searchVideoTypes: SearchVideoTypes = {
   video: 'EgIQAQ==',
   channel: 'EgIQAg==',
+  'channel-live': 'EgJAAQ==',
   playlist: 'EgIQAw==',
   movie: 'EgIQBA==',
   live: 'EgJAAQ=='

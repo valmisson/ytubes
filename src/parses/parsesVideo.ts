@@ -3,25 +3,31 @@ import { ObjectType } from '../types/shims'
 import { findByKey, toNumber } from '../shared'
 import { compress, getThumbnail, getVideoLink, unknown } from './utils'
 
-export function extractVideoData <T> (type: string, data: ObjectType): Array<T> {
+export function extractVideoData <T> (type: string, data: ObjectType, params: ObjectType = {}): Array<T> {
   const contents = getContents(data)
 
   const results = contents?.map((renderer: ObjectType): ExtractData => {
     if (type === 'video') return getVideoData(renderer?.videoRenderer)
     if (type === 'playlist') return getPlaylistData(renderer?.playlistRenderer)
     if (type === 'channel') return getChannelData(renderer?.channelRenderer)
+    if (type === 'channel-live') return getChannelLiveData(renderer?.gridVideoRenderer, params)
     if (type === 'movie') return getVideoData(renderer?.videoRenderer)
     if (type === 'live') return getLiveData(renderer?.videoRenderer)
 
     return null
   })
 
-  return results
+  return results.filter((item: ExtractData) => item !== null)
 }
 
 function getContents (dRender: ObjectType) {
   try {
     const sRender = findByKey('itemSectionRenderer', dRender)
+
+    const rRender = findByKey('gridRenderer', dRender)
+    if (rRender && rRender.items && rRender.items.length > 0) {
+      return rRender.items
+    }
 
     const results = sRender.contents?.filter((item: ObjectType) => {
       return findByKey('videoRenderer', item) ||
@@ -115,15 +121,58 @@ function getChannelData (cRender: ObjectType): Channel {
   }
 }
 
-function getLiveData (vRender: ObjectType): Live {
+function getChannelLiveData (vRender: ObjectType, params: ObjectType = {}): Live | null {
   try {
-    const { id, title, channel, link, shareLink, thumbnail } = getVideoData(vRender)
+    const { id, title, views, link, shareLink, thumbnail } = getVideoData(vRender)
+
+    if (params.isLive) {
+      // checking for live streams
+      const labels = findByKey('thumbnailOverlays', vRender)
+      let isLive = false
+      if (labels && JSON.stringify(labels).indexOf('"label":"LIVE"') !== -1) {
+        isLive = true
+      }
+      if (!isLive) return null
+    } else {
+      // checking for past live streams
+      const publishedText = vRender?.publishedTimeText?.simpleText || ''
+      const isPast = publishedText.indexOf('Streamed') !== -1
+      if (!isPast) return null
+    }
 
     return {
       id,
       type: 'live',
+      live: params.isLive || false,
       title,
       link,
+      views,
+      shareLink,
+      channel: `https://www.youtube.com/channel/${params?.channelId}`,
+      thumbnail
+    }
+  } catch (err) {
+    throw new Error('Error on get channel data')
+  }
+}
+
+function getLiveData (vRender: ObjectType): Live {
+  try {
+    const { id, title, channel, views, link, shareLink, thumbnail } = getVideoData(vRender)
+
+    const badges = findByKey('badges', vRender)
+    let isLive = false
+    if (badges && JSON.stringify(badges).indexOf('"label":"LIVE NOW"') !== -1) {
+      isLive = true
+    }
+
+    return {
+      id,
+      type: 'live',
+      live: isLive,
+      title,
+      link,
+      views,
       shareLink,
       channel,
       thumbnail
@@ -157,7 +206,10 @@ function getChannelVerified (cRender: ObjectType) {
 }
 
 function getVideoViews (vRender: ObjectType): number {
-  const viewsText = vRender?.viewCountText?.simpleText || '0'
+  let viewsText = vRender?.viewCountText?.simpleText || '0'
+  if (viewsText === '0') {
+    viewsText = vRender?.viewCountText?.runs[0]?.text || '0'
+  }
 
   return toNumber(viewsText)
 }

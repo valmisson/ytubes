@@ -3,7 +3,16 @@ import { URL } from 'url'
 
 export function fetch (url: string | URL, options = {}): Promise<string> {
   return new Promise((resolve, reject) => {
-    get(url, options, (res) => {
+    if (typeof url === 'string') {
+      url = new URL(url)
+    }
+    const opts = {
+      protocol: url.protocol,
+      hostname: url.hostname,
+      path: url.pathname + url.search,
+      ...options
+    }
+    get(opts, (res) => {
       res.setEncoding('utf-8')
 
       let data = ''
@@ -12,7 +21,13 @@ export function fetch (url: string | URL, options = {}): Promise<string> {
         data += chuck
       })
 
-      res.on('end', () => resolve(data))
+      res.on('end', () => {
+        if (res.statusCode === 302) {
+          fetch(res.headers.location || '', options).then(resolve).catch(reject)
+        } else {
+          resolve(data)
+        }
+      })
     }).on('error', error => reject(error))
   })
 }
