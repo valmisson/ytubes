@@ -1,5 +1,5 @@
-import { URL } from 'url'
-import { SearchVideoTypes } from '../types/shims'
+import { URL } from 'node:url'
+import { type SearchVideoTypes } from '../types/shims'
 
 export const headers = {
   'Access-Control-Allow-Origin': '*',

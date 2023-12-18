@@ -1,9 +1,16 @@
-import { Channel, ExtractData, Live, Playlist, PlaylistVideo, Video } from '../types/data'
-import { ObjectType } from '../types/shims'
+import {
+  type Channel,
+  type ExtractData,
+  type Live,
+  type Playlist,
+  type PlaylistVideo,
+  type Video
+} from '../types/data'
+import { type ObjectType } from '../types/shims'
 import { findByKey, toNumber } from '../shared'
 import { compress, getThumbnail, getVideoLink, unknown } from './utils'
 
-export function extractVideoData <T> (type: string, data: ObjectType): Array<T> {
+export function extractVideoData <T> (type: string, data: ObjectType): T[] {
   const contents = getContents(data)
 
   const results = contents?.map((renderer: ObjectType): ExtractData => {
@@ -24,8 +31,8 @@ function getContents (dRender: ObjectType) {
     const sRender = findByKey('itemSectionRenderer', dRender)
 
     const results = sRender.contents?.filter((item: ObjectType) => {
-      return findByKey('videoRenderer', item) ||
-        findByKey('channelRenderer', item) ||
+      return findByKey('videoRenderer', item) ??
+        findByKey('channelRenderer', item) ??
         findByKey('playlistRenderer', item)
     })
 
@@ -44,8 +51,8 @@ function getVideoData (vRender: ObjectType): Video {
       type: 'video',
       title: compress(vRender?.title),
       views: getVideoViews(vRender),
-      duration: vRender?.lengthText?.simpleText || '00:00',
-      uploaded: vRender?.publishedTimeText?.simpleText || unknown('Date'),
+      duration: vRender?.lengthText?.simpleText ?? '00:00',
+      uploaded: vRender?.publishedTimeText?.simpleText ?? unknown('Date'),
       link: getVideoLink(id),
       shareLink: getVideoLink(id, true),
       channel: getChannelLink(vRender),
@@ -86,7 +93,7 @@ function getPlaylistVideoData (pRender: ObjectType): PlaylistVideo {
     return {
       id,
       title: getTitle(pRender),
-      duration: pRender?.lengthText?.simpleText || '00:00',
+      duration: pRender?.lengthText?.simpleText ?? '00:00',
       link: getVideoLink(id),
       shareLink: getVideoLink(id, true),
       thumbnail: getThumbnail(id)
@@ -108,7 +115,7 @@ function getChannelData (cRender: ObjectType): Channel {
       type: 'channel',
       name: getTitle(cRender, 'Name'),
       verified: getChannelVerified(cRender),
-      link: channelLink || unknown('Link')
+      link: channelLink ?? unknown('Link')
     }
   } catch (err) {
     throw new Error('Error on get channel data')
@@ -151,13 +158,13 @@ function getChannelLink (cRender: ObjectType): string {
 
 function getChannelVerified (cRender: ObjectType) {
   const badges = cRender?.ownerBadges
-    ?.map((badge: ObjectType) => findByKey('style', badge)) || []
+    ?.map((badge: ObjectType) => findByKey('style', badge)) ?? []
 
-  return badges.includes('BADGE_STYLE_TYPE_VERIFIED') || badges.includes('BADGE_STYLE_TYPE_VERIFIED_ARTIST')
+  return badges.includes('BADGE_STYLE_TYPE_VERIFIED') ?? badges.includes('BADGE_STYLE_TYPE_VERIFIED_ARTIST')
 }
 
 function getVideoViews (vRender: ObjectType): number {
-  const viewsText = vRender?.viewCountText?.simpleText || '0'
+  const viewsText = vRender?.viewCountText?.simpleText ?? '0'
 
   return toNumber(viewsText)
 }
@@ -169,7 +176,7 @@ function getPlaylistLink (playlistId: string): string {
 }
 
 function getPlaylistCount (pRender: ObjectType): number {
-  const countText = compress(pRender?.videoCountText) || '0'
+  const countText = compress(pRender?.videoCountText) ?? '0'
 
   return toNumber(countText)
 }

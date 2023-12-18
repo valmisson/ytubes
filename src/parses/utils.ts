@@ -1,8 +1,8 @@
-import { ObjectType } from '../types/shims'
+import { type ObjectType } from '../types/shims'
 
 export function getSearchData (webPage: string, regex: RegExp): ObjectType {
   try {
-    const data: string = regex.exec(webPage)?.[1] || '{}'
+    const data: string = regex.exec(webPage)?.[1] ?? '{}'
 
     const result: ObjectType = JSON.parse(data)
 

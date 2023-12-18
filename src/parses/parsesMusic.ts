@@ -1,5 +1,5 @@
-import { ObjectType } from '../types/shims'
-import { Music } from '../types/data'
+import { type ObjectType } from '../types/shims'
+import { type Music } from '../types/data'
 import { findByKey } from '../shared'
 import { getThumbnail, getVideoLink, unknown } from './utils'
 
@@ -57,10 +57,10 @@ function getMusicData (dRender: ObjectType): Music {
     return {
       id,
       type: 'music',
-      title: mRenderLeft?.text || unknown('Title'),
-      artist: mRenderRightData[0]?.text || unknown('Artist'),
-      album: mRenderRightData[1]?.text || unknown('Album'),
-      duration: mRenderRight[mRenderRight.length - 1]?.text || '00:00',
+      title: mRenderLeft?.text ?? unknown('Title'),
+      artist: mRenderRightData[0]?.text ?? unknown('Artist'),
+      album: mRenderRightData[1]?.text ?? unknown('Album'),
+      duration: mRenderRight[mRenderRight.length - 1]?.text ?? '00:00',
       link: getMusicLink(id),
       videoLink: getVideoLink(id),
       channel: getChannelLink(channelID),

@@ -1,4 +1,4 @@
-import { ObjectType } from '../types/shims'
+import { type ObjectType } from '../types/shims'
 import { defaultOptions } from '../constants/default'
 
 export function isEmpty (object: ObjectType): boolean {

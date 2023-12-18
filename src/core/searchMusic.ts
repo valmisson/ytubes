@@ -1,12 +1,11 @@
-// import { ExtractData } from '../types/data'
-import { Music } from '../types/data'
-import { Options } from '../types/shims'
+import { type Music } from '../types/data'
+import { type Options } from '../types/shims'
 import { defaultOptions, headers, ytMusicURL } from '../constants/default'
 import { decodeHEX, fetch, isEmpty, isYtURL, sliceResults } from '../shared'
 import { extractMusicData, getSearchData } from '../parses'
 import { getVideo } from '..'
 
-async function searchMusic (query: string, options: Options): Promise<Array<Music>> {
+async function searchMusic (query: string, options: Options): Promise<Music[]> {
   if (!query) {
     throw new Error('Search query has empty')
   }
@@ -19,7 +18,7 @@ async function searchMusic (query: string, options: Options): Promise<Array<Musi
   if (isYtURL(query)) {
     const video = await getVideo(query, { max: 1, language })
 
-    query = video[0]?.title || query
+    query = video[0]?.title ?? query
   }
 
   ytMusicURL.search = `q=${query}`

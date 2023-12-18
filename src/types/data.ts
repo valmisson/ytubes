@@ -1,4 +1,4 @@
-import { SearchTypes } from './shims'
+import { type SearchTypes } from './shims'
 
 export interface Video {
   id: string
@@ -28,7 +28,7 @@ export interface Playlist {
   videoCount: number
   thumbnail: string
   link: string
-  preview: Array<Video>
+  preview: Video[]
   type: SearchTypes
 }
 

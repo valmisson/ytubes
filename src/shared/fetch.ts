@@ -1,5 +1,5 @@
-import { get } from 'https'
-import { URL } from 'url'
+import { get } from 'node:https'
+import { URL } from 'node:url'
 
 export function fetch (url: string | URL, options = {}): Promise<string> {
   return new Promise((resolve, reject) => {

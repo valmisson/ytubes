@@ -18,6 +18,4 @@ export interface SearchOptions {
 
 export type Options = Omit<SearchOptions, 'type'>
 
-export type ObjectType = {
-  [key: string]: any // eslint-disable-line @typescript-eslint/no-explicit-any
-}
+export type ObjectType = Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any

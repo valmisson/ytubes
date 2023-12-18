@@ -1,9 +1,9 @@
-import { SearchOptions } from '../types/shims'
+import { type SearchOptions } from '../types/shims'
 import { defaultOptions, headers, searchVideoTypes, ytURL } from '../constants/default'
 import { fetch, findByKey, isEmpty, sliceResults } from '../shared'
 import { extractVideoData, getSearchData } from '../parses'
 
-async function searchVideo <T> (query: string, options: SearchOptions): Promise<Array<T>> {
+async function searchVideo <T> (query: string, options: SearchOptions): Promise<T[]> {
   if (!query) {
     throw new Error('Search query has empty')
   }
