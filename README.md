@@ -120,6 +120,120 @@ const channel = await ytubes.getChannel('Hungria Hip Hop')
   ```
 </details>
 
+### getChannelVideos(query, options)
+
+Returns the details of all channel videos
+
+```js
+const channel = await ytubes.getChannelVideos('@eminem')
+```
+
+<details>
+  <summary>Output</summary>
+
+  ```js
+  [
+    {
+      id: 'lexLAjh8fPA',
+      type: 'video',
+      title: 'Eminem - Like Toy Soldiers (Official Music Video)',
+      views: 455969481,
+      duration: '5:22',
+      uploaded: '13 years ago',
+      link: 'https://www.youtube.com/watch?v=lexLAjh8fPA',
+      shareLink: 'https://youtu.be/lexLAjh8fPA',
+      channel: 'https://www.youtube.com/@eminem',
+      thumbnail: 'https://i.ytimg.com/vi/lexLAjh8fPA/maxresdefault.jpg'
+    },
+    ...
+  ]
+  ```
+</details>
+
+### getChannelShorts(query, options)
+
+Returns the details of all channel shorts
+
+```js
+const channel = await ytubes.getChannelShorts('@eminem')
+```
+
+<details>
+  <summary>Output</summary>
+
+  ```js
+  [
+    {
+      id: 'By7NMf3C7xk',
+      type: 'shorts',
+      title: 'Eminem | Fortnite’s The Big Bang Event',
+      views: '684K views',
+      link: 'https://www.youtube.com/shorts/By7NMf3C7xk',
+      channel: 'https://www.youtube.com/@eminem',
+      thumbnail: 'https://i.ytimg.com/vi/By7NMf3C7xk/maxresdefault.jpg'
+    },
+    ...
+  ]
+  ```
+</details>
+
+### getChannelLives(query, options)
+
+Returns the details of all channel lives
+
+```js
+const channel = await ytubes.getChannelLives('@MusicLabChill')
+```
+
+<details>
+  <summary>Output</summary>
+
+  ```js
+  [
+    {
+      id: '9ZJT08MsRAs',
+      type: 'live',
+      live: true,
+      title: '🎧Music for Maximum Productivity — Chillout Radio 24/7',
+      link: 'https://www.youtube.com/watch?v=9ZJT08MsRAs',
+      shareLink: 'https://youtu.be/9ZJT08MsRAs',
+      channel: 'https://www.youtube.com/@MusicLabChill',
+      thumbnail: 'https://i.ytimg.com/vi/9ZJT08MsRAs/maxresdefault.jpg',
+      views: 29
+    },
+    ...
+  ]
+  ```
+</details>
+
+### getChannelPlaylists(query, options)
+
+Returns the details of all channel playlists
+
+```js
+const channel = await ytubes.getChannelPlaylists('@eminem')
+```
+
+<details>
+  <summary>Output</summary>
+
+  ```js
+  [
+    {
+      id: 'FLfM3zsQsOnfWNUppiycmBuw',
+      type: 'playlist',
+      title: 'Favorites',
+      videoCount: 32,
+      link: 'https://www.youtube.com/playlist?list=FLfM3zsQsOnfWNUppiycmBuw',
+      channel: 'https://www.youtube.com/@eminem',
+      thumbnail: 'https://i.ytimg.com/vi/XbGs_qK2PQA/maxresdefault.jpg',
+      preview: 'https://www.youtube.com/watch?v=XbGs_qK2PQA&list=FLfM3zsQsOnfWNUppiycmBuw'
+    }
+    ...
+  ]
+  ```
+</details>
+
 ### getMovie(query, options)
 
 Returns the details of all movies found
@@ -155,7 +269,7 @@ const movie = await ytubes.getMovie('filmes de ação')
 Returns the details of all lives found
 
 ```js
-const live = await ytubes.getLive('Coding in Chicago')
+const live = await ytubes.getLive('Music for Work')
 ```
 
 <details>
@@ -164,13 +278,15 @@ const live = await ytubes.getLive('Coding in Chicago')
   ```js
   [
     {
-      id: 'esX7SFtEjHg',
+      id: '4kLviL8XwAI',
       type: 'live',
-      title: 'Coding in Chicago | 🎧  LoFi Jazz Hip-Hop [Code - Relax - Study]',
-      link: 'https://www.youtube.com/watch?v=esX7SFtEjHg',
-      shareLink: 'https://youtu.be/esX7SFtEjHg',
-      channel: 'https://www.youtube.com/channel/UC9rvsIHgzuiwTQ-yi0Qj2Mw',
-      thumbnail: 'https://i.ytimg.com/vi/esX7SFtEjHg/maxresdefault.jpg'
+      live: true,
+      title: 'Music for Work — Programming, Hacking, Coding Radio',
+      link: 'https://www.youtube.com/watch?v=4kLviL8XwAI',
+      shareLink: 'https://youtu.be/4kLviL8XwAI',
+      channel: 'https://www.youtube.com/@MusicLabChill',
+      thumbnail: 'https://i.ytimg.com/vi/4kLviL8XwAI/maxresdefault.jpg',
+      views: 79
     },
     ...
   ]
@@ -245,7 +361,7 @@ const videos = await ytubes.search('beautiful', { type: 'video' })
 | `max` | `30` | Set the maximum amount of results to return. |
 | `language` | `en` | Set the language that you would like for results to be returned in. |
 | | | &#11206; Option available only in `search`. |
-| `type` | `video` | Set the type of search on Youtube. The supported types are `video`, `playlist`, `channel`, `movie`, `live`, and `music`. |
+| `type` | `video` | Set the type of search on Youtube. The supported types are `video`, `playlist`, `channel`, `channelVideos`, `channelShorts`, `channelLives`, `channelPlaylists`, `movie`, `live`, and `music`. |
 
 
 ## Note

@@ -8,10 +8,12 @@ import {
 } from './types/data'
 import {
   type Options,
-  type SearchOptions
+  type SearchOptions,
+  type SearchVideoOptions
 } from './types/shims'
 import searchVideo from './core/searchVideo'
 import searchMusic from './core/searchMusic'
+import searchChannel from './core/searchChannel'
 
 async function getVideo (query: string, options?: Options): Promise<Video[]> {
   const videos = await searchVideo<Video>(query, {
@@ -38,6 +40,42 @@ async function getChannel (query: string, options?: Options): Promise<Channel[]>
   })
 
   return channels
+}
+
+async function getChannelVideos (channelID: string, options?: Options): Promise<Video[]> {
+  const channelVideos = await searchChannel<Video>(channelID, {
+    type: 'videos',
+    ...options
+  })
+
+  return channelVideos
+}
+
+async function getChannelShorts (channelID: string, options?: Options): Promise<Video[]> {
+  const channelVideos = await searchChannel<Video>(channelID, {
+    type: 'shorts',
+    ...options
+  })
+
+  return channelVideos
+}
+
+async function getChannelLives (channelID: string, options?: Options): Promise<Video[]> {
+  const channelVideos = await searchChannel<Video>(channelID, {
+    type: 'streams',
+    ...options
+  })
+
+  return channelVideos
+}
+
+async function getChannelPlaylists (channelID: string, options?: Options): Promise<Playlist[]> {
+  const channelPlaylists = await searchChannel<Playlist>(channelID, {
+    type: 'playlists',
+    ...options
+  })
+
+  return channelPlaylists
 }
 
 async function getMovie (query: string, options?: Options): Promise<Video[]> {
@@ -69,25 +107,45 @@ async function getMusic (query: string, options?: Options): Promise<Music[]> {
 async function search (query: string, options: SearchOptions): Promise<ExtractData[]> {
   const { type } = options
 
-  if (type === 'music') {
-    const {
-      max,
-      language
-    } = options
+  const {
+    max,
+    language
+  } = options
 
-    return await searchMusic(query, {
-      max,
-      language
-    })
+  if (type === 'music') {
+    return await searchMusic(query, { max, language })
   }
 
-  return await searchVideo<Video | Playlist | Channel | Live>(query, options)
+  if (type === 'channelVideos') {
+    return await getChannelVideos(query, { max, language })
+  }
+
+  if (type === 'channelShorts') {
+    return await getChannelShorts(query, { max, language })
+  }
+
+  if (type === 'channelLives') {
+    return await getChannelLives(query, { max, language })
+  }
+
+  if (type === 'channelPlaylists') {
+    return await getChannelPlaylists(query, { max, language })
+  }
+
+  return await searchVideo<Video | Playlist | Channel | Live>(
+    query,
+    options as SearchVideoOptions
+  )
 }
 
 export {
   getVideo,
   getPlaylist,
   getChannel,
+  getChannelVideos,
+  getChannelShorts,
+  getChannelLives,
+  getChannelPlaylists,
   getMovie,
   getLive,
   getMusic,

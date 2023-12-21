@@ -4,11 +4,19 @@ export type SearchVideoType = 'video'
   | 'movie'
   | 'live'
 
+export type SearchChannelType = 'videos'
+  | 'shorts'
+  | 'playlists'
+  | 'streams'
+
 export type SearchVideoTypes = Record<SearchVideoType, string>
 
-export type SearchMusicType = 'music'
-
-export type SearchTypes = SearchVideoType | SearchMusicType
+export type SearchTypes = SearchVideoType
+  | 'music'
+  | 'channelVideos'
+  | 'channelShorts'
+  | 'channelLives'
+  | 'channelPlaylists'
 
 export interface SearchOptions {
   type: SearchTypes
@@ -17,5 +25,17 @@ export interface SearchOptions {
 }
 
 export type Options = Omit<SearchOptions, 'type'>
+
+export interface SearchVideoOptions extends SearchOptions {
+  type: SearchVideoType
+}
+
+export interface SearchChannelOptions {
+  type: SearchChannelType
+  language?: string
+  max?: number
+}
+
+export interface SearchMusicOptions extends Options {}
 
 export type ObjectType = Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any

@@ -1,11 +1,11 @@
 import { type Music } from '../types/data'
-import { type Options } from '../types/shims'
+import { type SearchMusicOptions } from '../types/shims'
 import { defaultOptions, headers, ytMusicURL } from '../constants/default'
 import { decodeHEX, fetch, isEmpty, isYtURL, sliceResults } from '../shared'
 import { extractMusicData, getSearchData } from '../parses'
 import { getVideo } from '..'
 
-async function searchMusic (query: string, options: Options): Promise<Music[]> {
+async function searchMusic (query: string, options: SearchMusicOptions): Promise<Music[]> {
   if (!query) {
     throw new Error('Search query has empty')
   }

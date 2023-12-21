@@ -20,5 +20,6 @@ export const defaultOptions = {
   max: 30
 }
 
-export const ytURL = new URL('https://www.youtube.com/results')
+export const ytURL = new URL('https://www.youtube.com')
+export const ytVideoURL = new URL('https://www.youtube.com/results')
 export const ytMusicURL = new URL('https://music.youtube.com/search')
