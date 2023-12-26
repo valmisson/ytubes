@@ -1,3 +1,13 @@
+# [1.3.0](https://github.com/valmisson/ytubes/compare/v1.2.0...v1.3.0) (2023-12-26)
+
+
+### Features
+
+* add function `getShorts` ([5c495ee](https://github.com/valmisson/ytubes/commit/5c495ee2824a7b71c178774d268edee90d24aa54))
+* add functions `getChannelVideos, getChannelShorts, getChannelLives, getChannelPlaylists` ([895592b](https://github.com/valmisson/ytubes/commit/895592b82ef17a867c61ad048914acec601dba86))
+
+
+
 # [1.2.0](https://github.com/valmisson/ytubes/compare/v1.1.1...v1.2.0) (2021-10-22)
 
 
