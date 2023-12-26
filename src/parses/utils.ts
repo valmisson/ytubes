@@ -43,6 +43,34 @@ export function getVideoData (vRender: ObjectType): Video {
   }
 }
 
+export function getShortsData (vRender: ObjectType): Shorts {
+  try {
+    if (!findByKey('reelWatchEndpoint', vRender)) {
+      return {} as Shorts
+    }
+
+    const {
+      id,
+      title,
+      channel,
+      thumbnail,
+      views
+    } = getVideoData(vRender)
+
+    return {
+      id,
+      type: 'shorts',
+      title,
+      views,
+      link: getShortsLink(id),
+      channel,
+      thumbnail
+    }
+  } catch (err) {
+    throw new Error('Error on get shorts data')
+  }
+}
+
 export function getPlaylistData (pRender: ObjectType): Playlist {
   try {
     const id = pRender?.playlistId
@@ -122,6 +150,24 @@ export function getChannelPlaylistData (pRender: ObjectType): Playlist {
   }
 }
 
+export function getChannelShortsData (vRender: ObjectType): Shorts {
+  try {
+    const id = vRender?.videoId
+
+    return {
+      id,
+      type: 'shorts',
+      title: vRender?.headline?.simpleText,
+      views: vRender?.viewCountText?.simpleText ?? 0,
+      link: getShortsLink(id),
+      channel: getChannelLink(vRender),
+      thumbnail: getThumbnail(id)
+    }
+  } catch (err) {
+    throw new Error('Error on get shorts video data')
+  }
+}
+
 export function getLiveData (vRender: ObjectType): Live {
   try {
     const {
@@ -147,24 +193,6 @@ export function getLiveData (vRender: ObjectType): Live {
     }
   } catch (err) {
     throw new Error('Error on get live data')
-  }
-}
-
-export function getShortsData (vRender: ObjectType): Shorts {
-  try {
-    const id = vRender?.videoId
-
-    return {
-      id,
-      type: 'shorts',
-      title: vRender?.headline?.simpleText,
-      views: vRender?.viewCountText?.simpleText ?? 0,
-      link: getShortsLink(id),
-      channel: getChannelLink(vRender),
-      thumbnail: getThumbnail(id)
-    }
-  } catch (err) {
-    throw new Error('Error on get shorts video data')
   }
 }
 

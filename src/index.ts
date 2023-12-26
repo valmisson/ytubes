@@ -4,7 +4,8 @@ import {
   type Live,
   type Music,
   type Playlist,
-  type Video
+  type Video,
+  type Shorts
 } from './types/data'
 import {
   type Options,
@@ -22,6 +23,15 @@ async function getVideo (query: string, options?: Options): Promise<Video[]> {
   })
 
   return videos
+}
+
+async function getShorts (query: string, options?: Options): Promise<Shorts[]> {
+  const shorts = await searchVideo<Shorts>(`${query} #shorts`, {
+    type: 'shorts',
+    ...options
+  })
+
+  return shorts
 }
 
 async function getPlaylist (query: string, options?: Options): Promise<Playlist[]> {
@@ -51,8 +61,8 @@ async function getChannelVideos (channelID: string, options?: Options): Promise<
   return channelVideos
 }
 
-async function getChannelShorts (channelID: string, options?: Options): Promise<Video[]> {
-  const channelVideos = await searchChannel<Video>(channelID, {
+async function getChannelShorts (channelID: string, options?: Options): Promise<Shorts[]> {
+  const channelVideos = await searchChannel<Shorts>(channelID, {
     type: 'shorts',
     ...options
   })
@@ -140,6 +150,7 @@ async function search (query: string, options: SearchOptions): Promise<ExtractDa
 
 export {
   getVideo,
+  getShorts,
   getPlaylist,
   getChannel,
   getChannelVideos,

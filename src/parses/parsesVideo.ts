@@ -1,7 +1,7 @@
 import { type ExtractData } from '../types/data'
 import { type ObjectType } from '../types/shims'
 import { findByKey } from '../shared'
-import { getChannelData, getLiveData, getPlaylistData, getVideoData } from './utils'
+import { getChannelData, getLiveData, getPlaylistData, getShortsData, getVideoData } from './utils'
 
 export function extractVideoData <T> (type: string, data: ObjectType): T[] {
   const contents = getContents(data)
@@ -12,13 +12,14 @@ export function extractVideoData <T> (type: string, data: ObjectType): T[] {
     const channelRenderer = renderer?.channelRenderer
 
     if (type === 'video' && videoRenderer) return getVideoData(videoRenderer)
+    if (type === 'shorts' && videoRenderer) return getShortsData(videoRenderer)
     if (type === 'playlist' && playlistRenderer) return getPlaylistData(playlistRenderer)
     if (type === 'channel' && channelRenderer) return getChannelData(channelRenderer)
     if (type === 'movie' && videoRenderer) return getVideoData(videoRenderer)
     if (type === 'live' && videoRenderer) return getLiveData(videoRenderer)
 
     return null
-  })?.filter((result: ObjectType) => result)
+  })?.filter((result: ObjectType) => result?.id)
 
   return results
 }

@@ -1,7 +1,7 @@
 import { type ObjectType, type SearchChannelType } from '../types/shims'
 import { type ExtractData } from '../types/data'
 import { findByKey } from '../shared'
-import { getChannelPlaylistData, getLiveData, getShortsData, getVideoData } from './utils'
+import { getChannelPlaylistData, getChannelShortsData, getLiveData, getVideoData } from './utils'
 
 export function extractChannelData <T> (type: SearchChannelType, data: ObjectType): T[] {
   const contents = type === 'playlists'
@@ -20,12 +20,12 @@ export function extractChannelData <T> (type: SearchChannelType, data: ObjectTyp
     if (gridPlaylistRenderer) gridPlaylistRenderer.longBylineText = { url: channelId }
 
     if (type === 'videos' && videoRenderer) return getVideoData(videoRenderer)
-    if (type === 'shorts' && reelItemRenderer) return getShortsData(reelItemRenderer)
+    if (type === 'shorts' && reelItemRenderer) return getChannelShortsData(reelItemRenderer)
     if (type === 'streams' && videoRenderer) return getLiveData(videoRenderer)
     if (type === 'playlists' && gridPlaylistRenderer) return getChannelPlaylistData(gridPlaylistRenderer)
 
     return null
-  })?.filter((result: ObjectType) => result)
+  })?.filter((result: ObjectType) => result?.id)
 
   return results
 }

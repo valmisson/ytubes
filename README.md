@@ -57,6 +57,33 @@ const video = await ytubes.getVideo('Amor e fé')
   ```
 </details>
 
+### getShorts(query, options)
+
+Returns the details of all shorts found
+
+```js
+const video = await ytubes.getShorts('Beat Tribo da Periferia')
+```
+
+<details>
+  <summary>Output</summary>
+
+  ```js
+  [
+    {
+      id: 'RV9JhsBN26s',
+      type: 'shorts',
+      title: 'Beat Insônia Tribo da periferia & Hungria - cover beat #shorts',
+      views: 2286,
+      link: 'https://www.youtube.com/shorts/RV9JhsBN26s',
+      channel: 'https://www.youtube.com/@g-ruahiphop',
+      thumbnail: 'https://i.ytimg.com/vi/RV9JhsBN26s/maxresdefault.jpg'
+    },
+    ...
+  ]
+  ```
+</details>
+
 ### getPlaylist(query, options)
 
 Returns the details of all playlist found
@@ -361,7 +388,7 @@ const videos = await ytubes.search('beautiful', { type: 'video' })
 | `max` | `30` | Set the maximum amount of results to return. |
 | `language` | `en` | Set the language that you would like for results to be returned in. |
 | | | &#11206; Option available only in `search`. |
-| `type` | `video` | Set the type of search on Youtube. The supported types are `video`, `playlist`, `channel`, `channelVideos`, `channelShorts`, `channelLives`, `channelPlaylists`, `movie`, `live`, and `music`. |
+| `type` | `video` | Set the type of search on Youtube. The supported types are `video`, `shorts`, `playlist`, `channel`, `channelVideos`, `channelShorts`, `channelLives`, `channelPlaylists`, `movie`, `live`, and `music`. |
 
 
 ## Note

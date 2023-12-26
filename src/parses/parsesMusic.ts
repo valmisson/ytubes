@@ -8,8 +8,7 @@ export function extractMusicData (renderer: ObjectType): Array<Music> {
 
   const results = contents?.map((data: ObjectType): Music => {
     return getMusicData(data.musicResponsiveListItemRenderer)
-  })
-    ?.filter((result: ObjectType) => result)
+  })?.filter((result: ObjectType) => result?.id)
 
   return results
 }
