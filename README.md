@@ -3,7 +3,7 @@
 [![npm][npm-shields]](https://www.npmjs.com/package/ytubes)
 [![license][license-shields]](https://github.com/valmisson/ytubes/blob/main/LICENSE)
 
-Search for videos, playlists, channels, movies. live and musics on youtube without api key.
+Search for videos, shorts, playlists, channels, movies, live and musics on youtube without api key.
 
 ## Install
 

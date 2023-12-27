@@ -4,8 +4,8 @@ import {
   type Live,
   type Music,
   type Playlist,
-  type Video,
-  type Shorts
+  type Shorts,
+  type Video
 } from './types/data'
 import {
   type Options,
@@ -121,6 +121,10 @@ async function search (query: string, options: SearchOptions): Promise<ExtractDa
     max,
     language
   } = options
+
+  if (type === 'shorts') {
+    return await getShorts(query, { max, language })
+  }
 
   if (type === 'music') {
     return await searchMusic(query, { max, language })

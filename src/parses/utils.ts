@@ -6,7 +6,7 @@ import {
   type PlaylistVideo,
   type Shorts,
   type Video
-} from 'src/types/data'
+} from '../types/data'
 import { type ObjectType } from '../types/shims'
 import { findByKey, toNumber } from '../shared'
 
