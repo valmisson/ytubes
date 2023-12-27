@@ -1,3 +1,12 @@
+## [1.3.1](https://github.com/valmisson/ytubes/compare/v1.3.0...v1.3.1) (2023-12-27)
+
+
+### Bug Fixes
+
+* add type `shorts` on search function ([438565f](https://github.com/valmisson/ytubes/commit/438565fdc605a2ecb5b99301cfc93f46bed7053a))
+
+
+
 # [1.3.0](https://github.com/valmisson/ytubes/compare/v1.2.0...v1.3.0) (2023-12-26)
 
 
